@@ -1,0 +1,18 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+.dialogsItems {
+    padding: 10px;
+    color: white;
+
+}
+
+.dialogsItems a:visited {
+    color: white;
+}
+
+.dialogs a {
+    text-decoration: none;
+}
