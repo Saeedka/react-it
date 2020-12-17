@@ -1,11 +1,7 @@
 import React, {useEffect, useState} from 'react'
 
 const ProfileStatus = (props) => {
-    /* state = {
-         editMode: false,
-         status: this.props.status
-     }
- */
+
     let [editMode, setEditMode] = useState(false);
     let [status, setStatus] = useState("");
 

@@ -1,40 +1,34 @@
 import s from './Dialogs.module.css'
-import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
-import {Input, Textarea} from "../common/FormControls";
-import {required} from "../../utils/validators";
-import {Field, reduxForm} from "redux-form";
 import React from "react";
+import {Route, withRouter} from "react-router-dom";
+import Messages from "./Message/Messages";
 
 
-const Dialogs = (props) => {
-    const onSubmit = (formData) => {
-        props.addMessage(formData.message)
+class Dialogs extends React.Component {
+
+    componentDidMount() {
+        this.props.getDialogsList();
     }
-    let dialogsElelemens = props.dialogsPage.dialogs.map((d) => <DialogItem id={d.id} name={d.name}/>)
-    let messagesElements = props.dialogsPage.messages.map((m) => <Message message={m.message}/>)
-    return (
-        <div className={s.dialogs}>
-            <div className={s.dialogsItems}>
-                {dialogsElelemens}
-            </div>
 
-            <div className={s.messages}>
-                {messagesElements}
-                <DialogsReduxForm onSubmit={onSubmit}/>
-            </div>
+    componentDidUpdate(prevProps, prevState, snapshot) {
 
-        </div>
-    )
+    }
+
+    render() {
+
+
+        let dialogsElements = this.props.dialogsPage.dialogs.map((d) => <DialogItem id={d.id} userName={d.userName} photo={d.photos?.small}/>)
+        return (
+            <div className={s.dialogs}>
+                <div className={s.dialogsItems}>
+                    {dialogsElements}
+                </div>
+                <Route path='/dialogs/:userId' render={() => <Messages {...this.props}/>}/>
+            </div>
+        )
+    }
 }
 
-const DialogsForm = (props) => {
-    return (
-        <form onSubmit={props.handleSubmit}>
-            <Field placeholder={"Message"} name={"message"} component={Textarea} validate={[required]}/>
-            <button>Send</button>
-        </form>
-    )
-}
-const DialogsReduxForm =  reduxForm({form: 'dialogs'})(DialogsForm)
+
 export default Dialogs;

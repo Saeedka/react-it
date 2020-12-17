@@ -24,12 +24,7 @@ export const userAPI = {
 
     unfollow(userId) {
         return instance.delete(`follow/` + userId)
-    },
-
-    getProfile(userId) {
-        return instance.get(`profile/` + userId)
-    },
-
+    }
 }
 
 export const profileAPI = {
@@ -38,6 +33,9 @@ export const profileAPI = {
     },
     updateStatus(status) {
         return instance.put(`profile/status`, {status: status})
+    },
+    getProfile(userId) {
+        return instance.get(`profile/` + userId)
     }
 }
 
@@ -54,5 +52,17 @@ export const authAPI = {
     getCaptcha(){
         return instance.get('security/get-captcha-url');
     }
+}
 
+export const dialogsAPI={
+    getDialogs(){
+        return instance.get('dialogs')
+    },
+    getMessages(userId){
+        return instance.get(`dialogs/${userId}/messages`)
+    },
+    sendMessage(userId,message){
+        debugger
+        return instance.post(`dialogs/${userId}/messages`,{body: message})
+    }
 }

@@ -1,8 +1,6 @@
-import {profileAPI, userAPI} from "../api/api";
-import {setUser} from "./auth-reducer";
+import {profileAPI} from "../api/api";
 
 const ADD_POST = 'ADD_POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS'
 
@@ -53,9 +51,8 @@ export let setStatus = (status) => ({type: SET_STATUS, status})
 
 export const getProfileInfo = (userId) => {
     return (dispatch) => {
-        //  dispatch(toggleIsFetching(true));
-        userAPI.getProfile(userId).then(data => {
-            // dispatch(toggleIsFetching(false));
+        profileAPI.getProfile(userId).then(data => {
+            debugger
             dispatch(setUserProfile(data.data));
 
         });
@@ -64,9 +61,7 @@ export const getProfileInfo = (userId) => {
 
 export const getProfileStatus = (userId) => {
     return (dispatch) => {
-        //  dispatch(toggleIsFetching(true));
         profileAPI.getStatus(userId).then(response => {
-            // dispatch(toggleIsFetching(false));
             dispatch(setStatus(response.data));
 
         });
@@ -75,7 +70,6 @@ export const getProfileStatus = (userId) => {
 
 export const setProfileStatus = (status) => {
     return (dispatch) => {
-        //  dispatch(toggleIsFetching(true));
         profileAPI.updateStatus(status).then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(setStatus(status));
@@ -86,3 +80,4 @@ export const setProfileStatus = (status) => {
 
 
 export default profileReducer;
+

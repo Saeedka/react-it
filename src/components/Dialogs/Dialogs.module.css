@@ -16,3 +16,8 @@
 .dialogs a {
     text-decoration: none;
 }
+
+.photo {
+    width: 40px;
+    border-radius: 10px;
+}

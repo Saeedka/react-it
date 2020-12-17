@@ -4,6 +4,7 @@ import {Input} from "../common/FormControls";
 import {required} from "../../utils/validators";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
+import {Redirect} from "react-router-dom";
 
 const LoginForm = (props) => {
 
@@ -37,6 +38,7 @@ const Login = (props) => {
     const onSubmit = (formData) => {
         props.login(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }
+    if (props.isAuth) return <Redirect to={'/profile'}/>;
 
     return <div>
         <h1>Login</h1>
@@ -45,7 +47,8 @@ const Login = (props) => {
 }
 const mapStateToProps = (state) => {
     return {
-        captchaURL: state.authData.captchaURL
+        captchaURL: state.authData.captchaURL,
+        isAuth: state.authData.isAuth
     }
 }
 
